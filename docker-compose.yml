@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  market-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    depends_on:
+      - postgres-market
+
+  postgres-market:
+    image: "postgres:15.1"
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "market_database"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "11111111"
+    volumes:
+      - ./_databases/market/init:/docker-entrypoint-initdb.d
+      - market_database:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    container_name: "postgres-market"
+
+volumes:
+  market_database:
+    external: true
