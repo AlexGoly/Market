@@ -11,6 +11,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: "jdbc:postgresql://${DATABASE_HOST_IP:postgres-market}:${DATABASE_HOST_PORT:5432}/market_database"
+#    url: "jdbc:postgresql://${DATABASE_HOST_IP:localhost}:${DATABASE_HOST_PORT:5433}/market_database"
     username: "postgres"
     password: "11111111"
     driver-class-name: "org.postgresql.Driver"

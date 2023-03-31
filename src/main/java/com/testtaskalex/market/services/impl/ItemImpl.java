@@ -1,6 +1,7 @@
 package com.testtaskalex.market.services.impl;
 
 import com.testtaskalex.market.dtos.ItemDto;
+import com.testtaskalex.market.dtos.ItemResource;
 import com.testtaskalex.market.exceptions.ResourceNotFoundException;
 import com.testtaskalex.market.mappers.ItemMapper;
 import com.testtaskalex.market.persistance.entities.Item;
@@ -18,9 +19,9 @@ import java.util.stream.Collectors;
 public class ItemImpl implements ItemService {
 
     @Autowired
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
     @Autowired
-    ItemMapper itemMapper;
+    private ItemMapper itemMapper;
 
     @Override
     public ResponseEntity<ItemDto> getItem(Long id) {
@@ -45,15 +46,20 @@ public class ItemImpl implements ItemService {
     }
 
     @Override
-    public ResponseEntity<ItemDto> createItem(Item item) {
+    public ResponseEntity<ItemDto> createItem(ItemResource itemBody) {
+        Item item = new Item();
+        item.setPrice(itemBody.getPrice());
+        item.setName(itemBody.getName());
         Item savedItem = itemRepository.save(item);
         ItemDto itemDto = itemMapper.toDto(savedItem);
         return new ResponseEntity<>(itemDto, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<ItemDto> updateItem(Long id, Item itemBody) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found item with id = " + id));
+    public ResponseEntity<ItemDto> updateItem(Long id, ItemResource itemBody) {
+        Item item = itemRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Not found item with id = " + id));
+
         item.setName(itemBody.getName());
         item.setPrice(itemBody.getPrice());
         Item savedItem = itemRepository.save(item);

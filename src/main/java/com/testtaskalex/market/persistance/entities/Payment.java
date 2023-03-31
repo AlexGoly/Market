@@ -1,18 +1,16 @@
 package com.testtaskalex.market.persistance.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "payment")
+@Table(name = "PAYMENT")
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Payment {
     @Id
@@ -21,4 +19,9 @@ public class Payment {
     @Column(name = "sum", nullable = false)
     private Double sum;
     private Timestamp payment_date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
+
 }

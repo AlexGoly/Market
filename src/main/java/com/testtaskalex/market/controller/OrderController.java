@@ -1,8 +1,9 @@
 package com.testtaskalex.market.controller;
 
 import com.testtaskalex.market.dtos.OrderDto;
-import com.testtaskalex.market.persistance.entities.Order;
-import com.testtaskalex.market.persistance.repositories.OrderRepository;
+import com.testtaskalex.market.dtos.OrderResource;
+import com.testtaskalex.market.dtos.PaymentDto;
+import com.testtaskalex.market.dtos.PaymentResource;
 import com.testtaskalex.market.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,7 @@ import java.util.List;
 @RequestMapping("api/v1/orders")
 public class OrderController {
     @Autowired
-    OrderRepository orderRepository;
-    @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @GetMapping
     public ResponseEntity<List<OrderDto>> getOrders() {
@@ -32,16 +31,14 @@ public class OrderController {
 
 
     @PostMapping
-    // ToDo: Request body validation
-    public ResponseEntity<OrderDto> createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderResource orderBody) {
+        return orderService.createOrder(orderBody);
     }
 
 
     @PutMapping("/{id}")
-    // ToDo: Request body validation
-    public ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody Order order) {
-        return orderService.updateOrder(id, order);
+    public ResponseEntity<OrderDto> updateOrder(@PathVariable Long id, @RequestBody OrderResource orderBody) {
+        return orderService.updateOrder(id, orderBody);
     }
 
 
@@ -50,4 +47,20 @@ public class OrderController {
         return orderService.deleteOrder(id);
     }
 
+    @GetMapping("/{orderId}/item/{itemId}")
+    public ResponseEntity<OrderDto> addItemToOrder(@PathVariable Long orderId,
+                                                   @PathVariable Long itemId) {
+        return orderService.addItemToOrder(orderId, itemId);
+    }
+
+    @PostMapping("/{orderId}/payment")
+    public ResponseEntity<OrderDto> payForTheOrder(@PathVariable Long orderId,
+                                                   @RequestBody PaymentResource paymentBody) {
+        return orderService.payForTheOrder(orderId, paymentBody);
+    }
+
+    @GetMapping("/{orderId}/payment")
+    public ResponseEntity<List<PaymentDto>> getOrderItems(@PathVariable Long orderId) {
+        return orderService.getOrderPayments(orderId);
+    }
 }

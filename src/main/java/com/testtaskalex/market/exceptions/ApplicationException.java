@@ -1,8 +1,9 @@
 package com.testtaskalex.market.exceptions;
 
-public class ApplicationException extends  RuntimeException{
+public class ApplicationException extends RuntimeException {
     public ApplicationException() {
     }
+
     public ApplicationException(String message) {
         super(message);
     }

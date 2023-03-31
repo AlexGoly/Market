@@ -8,7 +8,7 @@ import lombok.ToString;
 
 
 @Entity
-@Table(name = "items")
+@Table(name = "ITEM")
 @Getter
 @Setter
 @ToString
@@ -17,7 +17,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
     private Double price;
 }

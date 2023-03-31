@@ -1,7 +1,7 @@
 package com.testtaskalex.market.services;
 
 import com.testtaskalex.market.dtos.PaymentDto;
-import com.testtaskalex.market.persistance.entities.Payment;
+import com.testtaskalex.market.dtos.PaymentResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -12,9 +12,9 @@ public interface PaymentService {
 
     ResponseEntity<PaymentDto> getPayment(Long id);
 
-    ResponseEntity<PaymentDto> createPayment(Payment payment);
+    ResponseEntity<PaymentDto> createPayment(PaymentResource paymentResource);
 
-    ResponseEntity<PaymentDto> updatePayment(Long id, Payment payment);
+    ResponseEntity<PaymentDto> updatePayment(Long id, PaymentResource paymentResource);
 
     ResponseEntity<HttpStatus> deletePayment(Long id);
 }

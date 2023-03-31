@@ -1,8 +1,7 @@
 package com.testtaskalex.market.controller;
 
 import com.testtaskalex.market.dtos.ItemDto;
-import com.testtaskalex.market.persistance.entities.Item;
-import com.testtaskalex.market.persistance.repositories.ItemRepository;
+import com.testtaskalex.market.dtos.ItemResource;
 import com.testtaskalex.market.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +15,7 @@ import java.util.List;
 public class ItemController {
 
     @Autowired
-    ItemRepository itemRepository;
-    @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @GetMapping
     public ResponseEntity<List<ItemDto>> getItems() {
@@ -32,16 +29,14 @@ public class ItemController {
 
 
     @PostMapping
-    // ToDo: Request body validation
-    public ResponseEntity<ItemDto> createItem(@RequestBody Item item) {
-        return itemService.createItem(item);
+    public ResponseEntity<ItemDto> createItem(@RequestBody ItemResource itemBody) {
+        return itemService.createItem(itemBody);
     }
 
 
     @PutMapping("/{id}")
-    // ToDo: Request body validation
-    public ResponseEntity<ItemDto> updateItem(@PathVariable Long id, @RequestBody Item item) {
-        return itemService.updateItem(id, item);
+    public ResponseEntity<ItemDto> updateItem(@PathVariable Long id, @RequestBody ItemResource itemBody) {
+        return itemService.updateItem(id, itemBody);
     }
 
 
