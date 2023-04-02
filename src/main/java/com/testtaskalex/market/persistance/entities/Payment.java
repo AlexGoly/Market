@@ -1,17 +1,13 @@
 package com.testtaskalex.market.persistance.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "PAYMENT")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
+@Table(name = "payment")
+@Data
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package com.testtaskalex.market.controller;
 import com.testtaskalex.market.dtos.PaymentDto;
 import com.testtaskalex.market.dtos.PaymentResource;
 import com.testtaskalex.market.services.PaymentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,14 @@ public class PaymentController {
 
 
     @PostMapping
-    public ResponseEntity<PaymentDto> createPayment(@RequestBody PaymentResource paymentResource) {
+    public ResponseEntity<PaymentDto> createPayment(@Valid @RequestBody PaymentResource paymentResource) {
         return paymentService.createPayment(paymentResource);
     }
 
 
     @PutMapping("/{id}")
     public ResponseEntity<PaymentDto> updatePayment(@PathVariable Long id,
-                                                    @RequestBody PaymentResource paymentBody) {
+                                                    @Valid @RequestBody PaymentResource paymentBody) {
         return paymentService.updatePayment(id, paymentBody);
     }
 

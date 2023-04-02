@@ -1,9 +1,6 @@
 package com.testtaskalex.market.services;
 
-import com.testtaskalex.market.dtos.OrderDto;
-import com.testtaskalex.market.dtos.OrderResource;
-import com.testtaskalex.market.dtos.PaymentDto;
-import com.testtaskalex.market.dtos.PaymentResource;
+import com.testtaskalex.market.dtos.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,7 +19,14 @@ public interface OrderService {
 
     ResponseEntity<OrderDto> addItemToOrder(Long orderId, Long itemId);
 
-    ResponseEntity<OrderDto> payForTheOrder(Long orderId, PaymentResource paymentResource);
+    ResponseEntity<OrderDto> payForTheOrder(Long orderId, PaymentResourceSum paymentResourceSum);
 
     ResponseEntity<List<PaymentDto>> getOrderPayments(Long orderId);
+
+    ResponseEntity<List<ItemDto>> getOrderItems(Long orderId);
+
+    ResponseEntity<OrderDto> shipOrder(Long orderId);
+
+    ResponseEntity<OrderDto> deliveredOrder(Long orderId);
+
 }

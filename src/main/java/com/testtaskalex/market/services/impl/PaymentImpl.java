@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.testtaskalex.market.constants.Constants.NOT_FOUND_ORDER_BY_ID;
+
 @Service
 public class PaymentImpl implements PaymentService {
     @Autowired
@@ -55,11 +57,12 @@ public class PaymentImpl implements PaymentService {
         Payment newPayment = new Payment();
         newPayment.setSum(paymentResource.getSum());
         newPayment.setPayment_date(Timestamp.valueOf(LocalDateTime.now()));
-
+        Long orderId = paymentResource.getOrderId();
         Order order = orderRepository
-                .findById(paymentResource.getOrderId())
+                .findById(orderId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Not found Payment with id = "));
+                        new ResourceNotFoundException(
+                                String.format(NOT_FOUND_ORDER_BY_ID, orderId)));
         newPayment.setOrder(order);
         paymentRepository.save(newPayment);
         PaymentDto paymentDto = paymentMapper.toDto(newPayment);

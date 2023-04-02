@@ -2,9 +2,12 @@ package com.testtaskalex.market.services.impl;
 
 import com.testtaskalex.market.dtos.ItemDto;
 import com.testtaskalex.market.dtos.ItemResource;
+import com.testtaskalex.market.dtos.OrderDto;
 import com.testtaskalex.market.exceptions.ResourceNotFoundException;
 import com.testtaskalex.market.mappers.ItemMapper;
+import com.testtaskalex.market.mappers.OrderMapper;
 import com.testtaskalex.market.persistance.entities.Item;
+import com.testtaskalex.market.persistance.entities.Order;
 import com.testtaskalex.market.persistance.repositories.ItemRepository;
 import com.testtaskalex.market.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +16,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.testtaskalex.market.constants.Constants.NOT_FOUND_ITEM_BY_ID;
 
 @Service
 public class ItemImpl implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
+
     @Autowired
     private ItemMapper itemMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
     @Override
     public ResponseEntity<ItemDto> getItem(Long id) {
         Item item = itemRepository
                 .findById(id).orElseThrow(() ->
-                        new ResourceNotFoundException("Not found item with id = " + id));
+                        new ResourceNotFoundException(
+                                String.format(NOT_FOUND_ITEM_BY_ID, id)));
         ItemDto itemDto = itemMapper.toDto(item);
         return new ResponseEntity<>(itemDto, HttpStatus.OK);
     }
@@ -72,4 +82,20 @@ public class ItemImpl implements ItemService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    public ResponseEntity<List<OrderDto>> getItemOrders(Long itemId) {
+        Item item = itemRepository
+                .findById(itemId).orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                String.format(NOT_FOUND_ITEM_BY_ID, itemId)));
+        Set<Order> itemOrders = item.getOrders();
+        if (itemOrders.isEmpty()) {
+            throw new ResourceNotFoundException("Nobody order item :: " + itemId);
+        }
+        List<OrderDto> itemOrdersList = itemOrders.stream()
+                .map((Order order) -> orderMapper.toDto(order)
+                )
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(itemOrdersList, HttpStatus.OK);
+
+    }
 }

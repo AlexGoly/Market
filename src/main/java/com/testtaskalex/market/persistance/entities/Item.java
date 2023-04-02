@@ -1,18 +1,17 @@
 package com.testtaskalex.market.persistance.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@EqualsAndHashCode(exclude = "orders")
 
 @Entity
-@Table(name = "ITEM")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Table(name = "item")
+@Data
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +19,10 @@ public class Item {
     @Column(name = "name", nullable = false)
     private String name;
     private Double price;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "item_orders",
+            joinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
+    private Set<Order> orders = new HashSet<>();
 }

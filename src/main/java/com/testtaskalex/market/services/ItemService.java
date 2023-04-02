@@ -2,6 +2,7 @@ package com.testtaskalex.market.services;
 
 import com.testtaskalex.market.dtos.ItemDto;
 import com.testtaskalex.market.dtos.ItemResource;
+import com.testtaskalex.market.dtos.OrderDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,4 +19,6 @@ public interface ItemService {
     ResponseEntity<ItemDto> updateItem(Long id, ItemResource itemResource);
 
     ResponseEntity<HttpStatus> deleteItem(Long id);
+
+    ResponseEntity<List<OrderDto>> getItemOrders(Long itemId);
 }

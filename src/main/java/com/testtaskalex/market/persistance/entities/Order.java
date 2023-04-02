@@ -2,25 +2,20 @@ package com.testtaskalex.market.persistance.entities;
 
 import com.testtaskalex.market.services.OrderStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ORDER_")
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
+@Table(name = "orders")
+@Data
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "current_status",
-            columnDefinition = "enum('CREATED', 'PROCESSING', 'SHIPPING', 'DELIVERED')")
     @Enumerated(EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus status;
     private Integer total_items;
     private Double total_payments;
@@ -28,5 +23,9 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Payment> payments = new HashSet<>();
+
+    @ManyToMany(mappedBy = "orders")
+    private Set<Item> items = new HashSet<>();
+
 
 }
