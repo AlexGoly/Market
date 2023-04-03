@@ -7,34 +7,25 @@ create table if not exists item
 
 create index if not exists item_name_idx on item(name);
 
-INSERT INTO item
+insert into item
 (id,"name",price)
-VALUES
+values
 (1,'Laptop_Asus',1000.0),
 (2,'Laptop_Mac',2000.0),
 (3,'PC',900.0);
 
-alter type order_status owner to postgres;
 
-
-create type order_status as enum ('CREATED', 'PROCESSING', 'SHIPPING', 'DELIVERED');
-
-
-
-create table if not exists  orders
+create table if not exists role
 (
-    id             bigserial
+    id   bigserial
         primary key,
-    current_status  order_status,
-    total_items    integer,
-    total_payments real);
-
-INSERT INTO orders
-(id,current_status,total_items,total_payments)
-VALUES
-(1,'CREATED',5,6212.0),
-(2,'SHIPPING',3,3311.5),
-(3,'DELIVERED',2,1112.0);
+    "name" varchar(255)
+);
+insert into role
+(id,"name")
+values
+(1,'USER'),
+(2,'MANAGER');
 
 create table if not exists payment
 (
@@ -46,11 +37,34 @@ create table if not exists payment
         constraint payment_order_id_fk
             references orders);
 
-INSERT INTO payment
+insert into payment
 (id,sum,payment_date,order_id)
-VALUES
+values
 (1,1345.30,'2023-01-04 20:32:59',1),
 (2,1245.31,'2023-01-04 21:32:59',2),
 (3,4245.50,'2023-01-04 22:32:59',1);
 
 
+create table if not exists users
+(
+    id       bigserial
+        primary key,
+    password varchar(255),
+    username varchar(255)
+);
+
+
+create table if not exists  orders
+(
+    id             bigserial
+        primary key,
+    order_status   varchar(255),
+    total_items    integer,
+    total_payments   double precision);
+
+insert into orders
+(id,order_status,total_items,total_payments)
+values
+(1,'CREATED',5,6212.0),
+(2,'SHIPPING',3,3311.5),
+(3,'DELIVERED',2,1112.0);

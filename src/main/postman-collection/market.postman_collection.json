@@ -7,11 +7,145 @@
 	},
 	"item": [
 		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registration new User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"alex1\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8091/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Role On Manager",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"alex1\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8091/api/v1/changerole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"api",
+								"v1",
+								"changerole"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Items",
 			"item": [
 				{
 					"name": "get all items",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -33,10 +167,25 @@
 				{
 					"name": "get  item",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex1",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/api/v1/items/1",
+							"raw": "http://localhost:8091/api/v1/items/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -46,7 +195,7 @@
 								"api",
 								"v1",
 								"items",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -55,10 +204,25 @@
 				{
 					"name": "get  item orders",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/api/v1/items/1/orders",
+							"raw": "http://localhost:8091/api/v1/items/2/orders",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -68,7 +232,7 @@
 								"api",
 								"v1",
 								"items",
-								"1",
+								"2",
 								"orders"
 							]
 						}
@@ -78,6 +242,21 @@
 				{
 					"name": "create item",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -139,6 +318,21 @@
 				{
 					"name": "delete item",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex7",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -151,7 +345,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/api/v1/items/9",
+							"raw": "http://localhost:8091/api/v1/items/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -161,7 +355,7 @@
 								"api",
 								"v1",
 								"items",
-								"9"
+								"2"
 							]
 						}
 					},
@@ -175,6 +369,21 @@
 				{
 					"name": "get all payments",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -196,6 +405,21 @@
 				{
 					"name": "get  payment",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex7",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -218,11 +442,26 @@
 				{
 					"name": "create payment",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex2",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n       \"orderId\": 6,\r\n    \"sum\": 100.0\r\n \r\n}",
+							"raw": "{\r\n       \"orderId\": 1,\r\n    \"sum\": 100.0\r\n \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -315,6 +554,21 @@
 				{
 					"name": "get all orders",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex7",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -336,6 +590,21 @@
 				{
 					"name": "get order payments",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -359,6 +628,21 @@
 				{
 					"name": "get order items",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -382,10 +666,25 @@
 				{
 					"name": "get  order",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "alex7",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/6",
+							"raw": "http://localhost:8091/api/v1/orders/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -395,7 +694,7 @@
 								"api",
 								"v1",
 								"orders",
-								"6"
+								"1"
 							]
 						}
 					},
@@ -404,10 +703,25 @@
 				{
 					"name": "add Item To order",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/6/item/3",
+							"raw": "http://localhost:8091/api/v1/orders/2/item/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -417,9 +731,9 @@
 								"api",
 								"v1",
 								"orders",
-								"6",
+								"2",
 								"item",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -428,11 +742,26 @@
 				{
 					"name": "Pay to the order",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"sum\": 100.0\r\n    }",
+							"raw": "{\r\n        \"sum\": 900.0\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -440,7 +769,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/5/payment",
+							"raw": "http://localhost:8091/api/v1/orders/2/payment",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -450,7 +779,7 @@
 								"api",
 								"v1",
 								"orders",
-								"5",
+								"2",
 								"payment"
 							]
 						}
@@ -460,11 +789,26 @@
 				{
 					"name": "create order",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "alex",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 4,\r\n    \"status\": \"CREATED\",\r\n    \"total_items\": 0,\r\n    \"total_payments\": 0.0\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"status\": \"CREATED\",\r\n    \"total_items\": 0,\r\n    \"total_payments\": 0.0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,6 +834,21 @@
 				{
 					"name": "update order",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "user2",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -502,7 +861,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/2",
+							"raw": "http://localhost:8091/api/v1/orders/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -512,7 +871,7 @@
 								"api",
 								"v1",
 								"orders",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -533,7 +892,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/5/ship",
+							"raw": "http://localhost:8091/api/v1/orders/2/ship",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -543,7 +902,7 @@
 								"api",
 								"v1",
 								"orders",
-								"5",
+								"2",
 								"ship"
 							]
 						}
@@ -565,7 +924,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8091/api/v1/orders/5/delivered",
+							"raw": "http://localhost:8091/api/v1/orders/2/delivered",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -575,7 +934,7 @@
 								"api",
 								"v1",
 								"orders",
-								"5",
+								"2",
 								"delivered"
 							]
 						}

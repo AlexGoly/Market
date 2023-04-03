@@ -4,7 +4,6 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      #      ddl-auto: "validate"
       #      //ToDo: Set validate in prod
       ddl-auto: "update"
     properties:
@@ -17,6 +16,10 @@ spring:
     username: "postgres"
     password: "11111111"
     driver-class-name: "org.postgresql.Driver"
+  main:
+    allow-circular-references: true
+
+
 server:
   port: ${PORT:8091}
 
